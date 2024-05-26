@@ -26,5 +26,34 @@ Pour cloner et exécuter ce projet localement, suivez ces étapes :
 
 1. **Clonez le référentiel** :
    ```bash
-   git clone https://github.com/votre_nom_utilisateur/hunter-assassin-remake.git
+   git clone https://github.com/votre_nom_utilisateur/hunter-assassin-remake.git](https://github.com/CamatoDev/Hunter-Assassin-project.git
 
+2. **Ouvrez le projet dans Unity** :
+- Assurez-vous d'avoir Unity installé sur votre machine.
+- Ouvrez Unity Hub, cliquez sur "Add", puis sélectionnez le dossier du projet cloné.
+
+3. **Installez les dépendances (si nécessaire)** :
+
+Utilisez le package manager de Unity pour installer les packages requis.
+
+## Utilisation
+Pour jouer au jeu ou tester les fonctionnalités :
+
+1. **Lancer la scène principale** :
+
+- Ouvrez Unity et sélectionnez la scène principale du projet.
+- Cliquez sur le bouton "Play" dans l'éditeur Unity pour démarrer le jeu.
+
+2. **Contrôles** :
+
+- Cliquez sur le terrain pour déplacer l'avatar du joueur.
+- Évitez les ennemis et éliminez-les en les touchant sans vous faire tirer dessus.
+
+## Développement
+### Structure du Projet
+- **Assets** : Contient tous les assets du projet, y compris les scripts, textures, sons, et UI.
+- **Scripts** : Contient les scripts C# responsables des mécaniques de jeu.
+- **Scenes** : Contient les différentes scènes du jeu.
+
+## Licence
+Ce projet est sous licence MIT.
