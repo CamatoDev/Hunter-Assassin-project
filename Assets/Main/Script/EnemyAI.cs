@@ -40,17 +40,18 @@ public class EnemyAI : MonoBehaviour
     Vector3 walkPoint;
     //variable qui dis si l'ennemi est à la poursuit du joueur ou non
     bool isFollowPlayer = false;
-    //public float maxRange = 0.8f;
-    //public float minRange = 0.2f;
-    //public float fov = 1f;
-    //public float aspect = 1f;
+    //Pour les animation 
+    public Animator animator;
 
     public NavMeshAgent agent;
 
     //
     private void Start()
     {
+        //Recupère le component de l'audio source 
         enemySound = GetComponent<AudioSource>();
+        //Recuperer le component des animations 
+        animator = gameObject.GetComponent<Animator>();
     }
     // Update is called once per frame
     void Update()
@@ -94,13 +95,18 @@ public class EnemyAI : MonoBehaviour
 
         if (walkPointSet)
         {
+            //On fixe la destination de l'ennemi 
             agent.destination = walkPoint;
+
+            //Si l'ennemi ne poursuit le pas le joueur 
             if(!isFollowPlayer)
             {
+                animator.SetFloat("Run", 0f);
                 agent.speed = patrolingSpeed;
             }
-            else
+            else //Si il le poursuit 
             {
+                animator.SetFloat("Run", 1f);
                 agent.speed = chaseSpeed;
             }
 
@@ -143,22 +149,24 @@ public class EnemyAI : MonoBehaviour
     //Quand le joueuer est detecté 
     void Chase()
     {
+        animator.SetFloat("Run", 1f);
         agent.destination = target.transform.position;
         agent.speed = chaseSpeed;
 
-        //Tire 
-        if(fireCountDown <= 0f)
-        {
-            Shoot();
-            fireCountDown = 1f / fireRate; 
-        }
+        ////Tire 
+        //if(fireCountDown <= 0f)
+        //{
+        //    Shoot();
+        //    fireCountDown = 1f / fireRate; 
+        //}
 
-        fireCountDown -= Time.deltaTime;
+        //fireCountDown -= Time.deltaTime;
     }
 
     void Shoot()
     {
         enemySound.PlayOneShot(gunSound);
+        animator.SetBool("Shoot", true);
         Debug.Log("Tir effectué.");
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, eyes.rotation);
         //reférence au script bullet

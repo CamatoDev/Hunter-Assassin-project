@@ -45,7 +45,7 @@ public class PlayerStats : MonoBehaviour
             if(playerTime <= 0f)
                 playerTime = 0f;
             //on actualise le temps passé dans le niveau 
-            timer.text = playerTime.ToString();
+            timer.text = string.Format("{0:00.00}", playerTime); 
         }
 
         //on actualise le nombre de d'ennemi tué
@@ -60,13 +60,6 @@ public class PlayerStats : MonoBehaviour
             this.enabled = false;
         }
     }
-
-    /*couroutine qui vas afficher le temps passé par le joueur dans le niveau 
-    IEnumerator TimePassed()
-    {
-        //Debug.Log("Temps passé : " + playerTime);
-        yield return new WaitForSeconds(1.0f);
-    }*/
 
     //fonction de recompense par kill
     public void Gain(int Value)

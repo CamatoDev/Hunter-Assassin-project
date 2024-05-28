@@ -17,7 +17,10 @@ public class UpgradeMenu : MonoBehaviour
     private void Start()
     {
         //on sauvergarde l'argent du joueur 
-        PlayerPrefs.SetInt("Money", 0);
+        if(PlayerPrefs.GetInt("Money") <= 0)
+        {
+            PlayerPrefs.SetInt("Money", 0);
+        }
 
         money.text =  PlayerPrefs.GetInt("Money").ToString();
 

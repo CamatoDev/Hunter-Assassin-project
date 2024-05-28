@@ -87,6 +87,7 @@ public class Player_Nav : MonoBehaviour
                 {
                     //si c'est le cas on verouille l'ennemy 
                     Debug.Log("Click on enemy");
+                    //Apparaitre un marqueur surr l'ennemi 
                     /*modifié pour que je joueur suive l'ennemi dans ces déplacement jusqu'à le tuer et une fois l'ennemi mort faire spwan les récompenses*/
                     agent.destination = target.position; 
                 }
