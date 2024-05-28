@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     //Nombre total d'enemi dans le niveau 
-    public static float enemyNomber = 4f;
+    public static float enemyNomber;
+    string enemyTag = "Enemy";
     //menu de gameover 
     public GameObject gameOver;
     public static bool gameIsOver;
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        enemyNomber = enemies.Length;
         gameIsOver = false;
     }
 
