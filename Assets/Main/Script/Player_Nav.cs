@@ -16,6 +16,7 @@ public class Player_Nav : MonoBehaviour
 
     public Transform target;
     string enemyTag = "Enemy";
+    public GameObject enemyDeathEffect;
     //Distance entre le joueuer et l'enemi 
     float Distance;
     //Distance d'attaque du joueuer 
@@ -132,15 +133,6 @@ public class Player_Nav : MonoBehaviour
         }
     }
 
-    /*public void OnColisionEnter(Collision collision)
-    {
-        if (collision.transform.CompareTag(enemyTag))
-        {
-            Debug.Log("Enemi detruit.");
-            Destroy(collision.transform.gameObject);
-        }
-    }*/
-
     void Attack()
     {
         playSound.PlayOneShot(attackSound);
@@ -164,39 +156,9 @@ public class Player_Nav : MonoBehaviour
     void Rewards()
     {
         Debug.Log("Rewards spawn !");
-        GameObject rewardGO = (GameObject)Instantiate(rewardsPrefab, target.position, target.rotation);
-        GameObject rewardGO1 = (GameObject)Instantiate(rewardsPrefab, target.position, target.rotation);
-        GameObject rewardGO2 = (GameObject)Instantiate(rewardsPrefab, target.position, target.rotation);
-        GameObject rewardGO3 = (GameObject)Instantiate(rewardsPrefab, target.position, target.rotation);
-        GameObject rewardGO4 = (GameObject)Instantiate(rewardsPrefab, target.position, target.rotation);
-        //reférence au script bullet
-        GameObject[] rewards = GameObject.FindGameObjectsWithTag("Rewards");
-        foreach (GameObject reward in rewards)
-        {
-            Rewards s_reward = reward.GetComponent<Rewards>();
-            //vérification que le script n'est pas null
-            if (s_reward != null)
-            {
-                s_reward.Seek(target);
-            }
-        }
+        //On instantie l'objet en le définissant comme un game object 
+        GameObject effectGO = (GameObject)Instantiate(enemyDeathEffect, target.position, target.rotation);
+        //On détruit l'objet au bout d'une seconde 
+        Destroy(effectGO, 1.5f);
     }
 }
-
-
-//public void OnCollisionEnter(Collision collision)
-//{
-//    if (collision.transform.CompareTag("Enemy"))
-//    {
-//        Destroy(collision.gameObject);
-//        Debug.Log("Enemi detruit.");
-//    }
-//}
-//public void OnTriggerEnter(Collider collision)
-//{
-//    if (collision.transform.CompareTag("Enemy"))
-//    {
-//        Destroy(collision.gameObject);
-//        Debug.Log("Enemi detruit.");
-//    }
-//}

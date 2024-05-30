@@ -6,8 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    //Reférence à scene fader 
+    public SceneFader sceneFader;
     //Text du niveau à jouer 
     public Text levelToLoad;
+    //Niveau à jouer
+    string levelReached;
 
     //Source audio 
     public AudioSource buttons;
@@ -17,9 +21,10 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         //Création de la variable de sauvegarde de niveau (qui sera concervé même après la fermeture du jeu) 
-        int levelReached = PlayerPrefs.GetInt("levelReached", 1);
+        PlayerPrefs.SetString("levelReached", "Level1");
+        levelReached = PlayerPrefs.GetString("levelReached");
 
-        levelToLoad.text = "Level " + levelReached;
+        levelToLoad.text = levelReached;
     }
 
     //Fonction pour jouer 
@@ -27,7 +32,7 @@ public class MainMenu : MonoBehaviour
     {
         //On joue le son au click sur le bouton
         buttons.PlayOneShot(buttonClick);
-        SceneManager.LoadScene("Level1");
+        sceneFader.FadeTo(levelReached);
     }
 
     //fonction pour lancé le menu des améliorations
@@ -35,7 +40,7 @@ public class MainMenu : MonoBehaviour
     {
         //On joue le son au click sur le bouton
         buttons.PlayOneShot(buttonClick);
-        SceneManager.LoadScene("UpgradeMenu");
+        sceneFader.FadeTo("UpgradeMenu");
     }
 
     //fonction pour quitter le jeu 

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class UpgradeMenu : MonoBehaviour
 {
+    //Reférence à scene fader 
+    public SceneFader sceneFader;
     //Source audio 
     public AudioSource buttons;
     //clip audio 
@@ -37,6 +39,6 @@ public class UpgradeMenu : MonoBehaviour
     public void Menu()
     {
         buttons.PlayOneShot(buttonClick);
-        SceneManager.LoadScene("MainMenu");
+        sceneFader.FadeTo("MainMenu");
     }
 }

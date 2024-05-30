@@ -5,14 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-   public void Retry()
-   {
+    //Reférence à scene fader 
+    public SceneFader sceneFader;
+    //Source audio 
+    public AudioSource buttons;
+    //clip audio 
+    public AudioClip buttonClick;
+    public void Retry()
+    {
+        //On joue le son au click sur le bouton
+        buttons.PlayOneShot(buttonClick);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-   }
+    }
 
     //Retourner au menu 
     public void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        //On joue le son au click sur le bouton
+        buttons.PlayOneShot(buttonClick);
+        sceneFader.FadeTo("MainMenu");
     }
 }

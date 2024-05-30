@@ -10,7 +10,7 @@ public class Bullets : MonoBehaviour
     //dégat de la balle 
     public float damage = 10f;
     //effect de la balle 
-    public GameObject bulletImpactEffect;
+    public GameObject arrowImpactEffect;
 
     public void Seek(Transform _target)
     {
@@ -47,10 +47,13 @@ public class Bullets : MonoBehaviour
     void HitTarget()
     {
         Debug.Log("Balle contact !");
-        GameObject effectGO = (GameObject)Instantiate(bulletImpactEffect, transform.position, transform.rotation);
+        //On instantie l'objet en le définissant comme un game object 
+        GameObject effectGO = (GameObject)Instantiate(arrowImpactEffect, transform.position, transform.rotation);
+        //On détruit l'objet au bout d'une seconde 
         Destroy(effectGO, 1f);
+        //On de la flèche elle même 
         Destroy(gameObject);
-        //Destroy(target.gameObject);
+        //On n'appelle la fonction qui ajoute des dégats à l'ennemi
         target.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
     }
 

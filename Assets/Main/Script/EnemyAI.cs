@@ -29,7 +29,7 @@ public class EnemyAI : MonoBehaviour
     //Variable pour tirer sur le joueuer 
     public float fireRate = 1f;
     float fireCountDown = 0f;
-    public GameObject bulletPrefab;
+    public GameObject arrowPrefab;
     public Transform firePoint;
     public Transform eyes;
 
@@ -42,6 +42,8 @@ public class EnemyAI : MonoBehaviour
     bool isFollowPlayer = false;
     //Pour les animation 
     public Animator animator;
+    //Pour le contrôle de l'animator 
+    float enemyState;
 
     public NavMeshAgent agent;
 
@@ -83,12 +85,15 @@ public class EnemyAI : MonoBehaviour
 
             fireCountDown -= Time.deltaTime;
         }
+
+        animator.SetFloat("State", enemyState);
     }
 
     void Patroling()
     {
+        enemyState = 0.3f;
         //Simple patrouille
-        if(!walkPointSet)
+        if (!walkPointSet)
         {
             SearchWalkPoint();
         }
@@ -101,12 +106,10 @@ public class EnemyAI : MonoBehaviour
             //Si l'ennemi ne poursuit le pas le joueur 
             if(!isFollowPlayer)
             {
-                animator.SetFloat("Run", 0f);
                 agent.speed = patrolingSpeed;
             }
             else //Si il le poursuit 
             {
-                animator.SetFloat("Run", 1f);
                 agent.speed = chaseSpeed;
             }
 
@@ -149,33 +152,24 @@ public class EnemyAI : MonoBehaviour
     //Quand le joueuer est detecté 
     void Chase()
     {
-        animator.SetFloat("Run", 1f);
+        enemyState = 0.6f;
         agent.destination = target.transform.position;
         agent.speed = chaseSpeed;
-
-        ////Tire 
-        //if(fireCountDown <= 0f)
-        //{
-        //    Shoot();
-        //    fireCountDown = 1f / fireRate; 
-        //}
-
-        //fireCountDown -= Time.deltaTime;
     }
 
     void Shoot()
     {
+        enemyState = 1f;
         enemySound.PlayOneShot(gunSound);
-        animator.SetBool("Shoot", true);
         Debug.Log("Tir effectué.");
-        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, eyes.rotation);
+        GameObject arrowtGO = (GameObject)Instantiate(arrowPrefab, firePoint.position, eyes.rotation);
         //reférence au script bullet
-        Bullets bullet = bulletGO.GetComponent<Bullets>();
+        Bullets arrow = arrowtGO.GetComponent<Bullets>();
 
         //vérification que le script n'est pas null
-        if(bullet != null)
+        if(arrow != null)
         {
-            bullet.Seek(target);
+            arrow.Seek(target);
         }
     }
 
@@ -183,7 +177,5 @@ public class EnemyAI : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, chaseRange);
-        //Gizmos.DrawIcon();
-        //Gizmos.DrawFrustum(transform.position, fov, maxRange, minRange, aspect);
     }
 }

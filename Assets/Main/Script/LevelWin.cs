@@ -5,16 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class LevelWin : MonoBehaviour
 {
+    //Reférence à scene fader 
+    public SceneFader sceneFader;
+    //Source audio 
+    public AudioSource buttons;
+    //clip audio 
+    public AudioClip buttonClick;
     //le nom de la scene à charger 
     public string nextLevel;
-    //l'indice de la scène à charger 
-    public int levelToUnlock;
 
     //Niveau à charger 
     public void LevelToLoad()
     {
+        //On joue le son au click sur le bouton
+        buttons.PlayOneShot(buttonClick);
         //On sauvegarde le niveau débloqué 
-        PlayerPrefs.SetInt("levelReached", levelToUnlock);
-        SceneManager.LoadScene(nextLevel);
+        PlayerPrefs.SetString("levelReached", nextLevel);
+        sceneFader.FadeTo(nextLevel);
     }
 }

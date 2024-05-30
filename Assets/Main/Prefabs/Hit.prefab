@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2931713557802371942}
   - component: {fileID: 2931713557802371941}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4816,7 +4816,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 70e830fbb20b98e40be271b8119df1a1, type: 2}
+  - {fileID: 2100000, guid: a145df37352b12f49b1c8a36022b51a5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
