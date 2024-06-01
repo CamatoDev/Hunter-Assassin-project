@@ -20,6 +20,14 @@ Bienvenue dans le référentiel GitHub du remake de Hunter Assassin sur Unity 3D
 - **Interfaces Utilisateur** : Amélioration des interfaces avec des arrière-plans et des boutons plus attractifs pour une meilleure expérience utilisateur.
 - **Effets Sonores** : Intégration de sons pour l'élimination des ennemis, les tirs et les clics sur les boutons en utilisant les composants Audio Source et Audio Clip de Unity.
 - **Système de Sauvegarde** : Implémentation d'un système de sauvegarde avec PlayerPrefs permettant de conserver le dernier niveau atteint et la somme d'argent collectée même après la fermeture du jeu.
+- **Système de Récompense** : Des gems tombent à la mort d'un ennemi grâce au système de particules de Unity, offrant une récompense visuelle et incitative.
+- **Zones de Détection des Ennemis** : Les zones de détection des ennemis ont été retravaillées pour donner un champ de vue limité dans les cercles de détection, visualisé grâce aux Gizmos.
+- **Nouveaux Ennemis et Animations** : Ajout de modèles 3D pour les ennemis avec des animations appliquées via le système d'Animator de Unity.
+- **Boost de Vie Activable** : Ajout d'un modèle 3D représentant un boost de vie. Lorsqu'il est activé, un bouton devient visible permettant au joueur de cliquer pour obtenir un boost.
+- **Modèle 3D du Joueur et Animations** : Le joueur est représenté par un modèle 3D avec des animations appliquées via le système d'Animator.
+- **Transitions entre les Scènes** : Mise en place d'une transition en fondu entre les scènes, utilisant une image dont l'opacité est modifiée via un script.
+
+
 
 ## Installation
 Pour cloner et exécuter ce projet localement, suivez ces étapes :
