@@ -27,7 +27,7 @@ public class PlayerStats : MonoBehaviour
     {
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         //Initialisation de la vie 
-        playerLive = 100f; 
+        playerLive = 60f; 
         playerGain = 0;
         //Le temps du que le joueur dois passer dans le niveau est défini  
         playerTime = manager.Leveltime;
