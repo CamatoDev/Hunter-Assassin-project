@@ -22,8 +22,6 @@ public class Player_Nav : MonoBehaviour
     //Distance d'attaque du joueuer 
     public float attackDistance = 0.15f;
     public float targetLoockDist = 0.1f;
-    //recompense 
-    public GameObject rewardsPrefab;
  
 
     public Camera Camera;

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     //Nombre total d'enemi dans le niveau 
     public static float enemyNomber;
     string enemyTag = "Enemy";
+    //Nombre de temps prévu pour le niveau 
+    public float Leveltime = 100f;
     //menu de gameover 
     public GameObject gameOver;
     public static bool gameIsOver;

@@ -1,15 +1,14 @@
 fileFormatVersion: 2
-guid: d8a128d37b85a01438ea7963f00efdbc
+guid: 9e9bb8af55e9c8746a0c5c24e361b236
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable:
+  internalIDToNameTable: []
+  externalObjects:
   - first:
-      74: -4791504522942941401
-    second: Armature|Armature|mixamo.com|Layer0
-  - first:
-      74: -8259349029343172047
-    second: Armature|Ennemy_Walk
-  externalObjects: {}
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: f79ea605f2738144a8606b79f06b290e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,7 +39,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.2
+    globalScale: 150
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -91,7 +90,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.002
+    globalScale: 150
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

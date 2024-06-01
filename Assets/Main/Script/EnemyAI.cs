@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    //Référence au Script FieldOfView
+    FieldOfView FieldOfView;
     //Source Audio 
     public AudioSource enemySound;
     //Audio Clip 
@@ -12,12 +14,11 @@ public class EnemyAI : MonoBehaviour
     //La variable qui vas contenir le joueuer (cible de l'enemi) 
     public Transform target;
     //La valeur de l'ennemi 
-    public int value = 20;
+    public int value = 50;
 
     //Distance entre le joueuer et l'enemi 
     float Distance;
-    //distance à laquelle la poursuite s'active 
-    public float chaseRange = 1f;
+    //vitesse à laquelle la poursuite s'active 
     public float chaseSpeed = 1f;
     public float securityDistance = 0.2f;
 
@@ -50,8 +51,10 @@ public class EnemyAI : MonoBehaviour
     //
     private void Start()
     {
+        //Récupère le script 
+        FieldOfView = gameObject.GetComponent<FieldOfView>();
         //Recupère le component de l'audio source 
-        enemySound = GetComponent<AudioSource>();
+        enemySound = gameObject.GetComponent<AudioSource>();
         //Recuperer le component des animations 
         animator = gameObject.GetComponent<Animator>();
     }
@@ -60,19 +63,19 @@ public class EnemyAI : MonoBehaviour
     {
         Distance = Vector3.Distance(transform.position, target.position);
 
-        if (Distance > chaseRange)
+        if (!FieldOfView.canSeePlayer)
         {
             Patroling();
         }
         
         //L'enemi poursuit le joueuer en lui tirant dessus 
-        if (Distance < chaseRange && Distance > securityDistance)
+        if (FieldOfView.canSeePlayer && Distance > securityDistance)
         {
             Chase();
         }
 
         //l'enemie s'arrête à une distance de sécurité et tire sur le joueuer
-        if (Distance < securityDistance)
+        if (FieldOfView.canSeePlayer && Distance <= securityDistance)
         { 
             agent.destination = transform.position;
             transform.LookAt(target);
@@ -171,11 +174,5 @@ public class EnemyAI : MonoBehaviour
         {
             arrow.Seek(target);
         }
-    }
-
-    public void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, chaseRange);
     }
 }

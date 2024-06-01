@@ -19,7 +19,6 @@ public class PlayerStats : MonoBehaviour
     public Text killNomber;
     //Nombre de temps passé dans le niveau 
     public static float playerTime;
-    public float Leveltime = 60f;
     public Text timer;
 
 
@@ -30,8 +29,8 @@ public class PlayerStats : MonoBehaviour
         //Initialisation de la vie 
         playerLive = 100f; 
         playerGain = 0;
-        ////Le temps du que le joueur dois passer dans le niveau est défini  
-        playerTime = Leveltime;
+        //Le temps du que le joueur dois passer dans le niveau est défini  
+        playerTime = manager.Leveltime;
     }
 
     // Update is called once per frame
