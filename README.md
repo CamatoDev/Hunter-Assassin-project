@@ -34,8 +34,8 @@ Pour cloner et exécuter ce projet localement, suivez ces étapes :
 
 1. **Clonez le référentiel** :
    ```bash
-   git clone https://github.com/votre_nom_utilisateur/hunter-assassin-remake.git](https://github.com/CamatoDev/Hunter-Assassin-project.git
-
+   git clone https://github.com/CamatoDev/Hunter-Assassin-project.git
+   
 2. **Ouvrez le projet dans Unity** :
 - Assurez-vous d'avoir Unity installé sur votre machine.
 - Ouvrez Unity Hub, cliquez sur "Add", puis sélectionnez le dossier du projet cloné.
