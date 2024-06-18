@@ -42,6 +42,8 @@ public class Bullets : MonoBehaviour
         //on deplace la balle 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
         //transform.Translate(Vector3.forward * speed); Recherche sur le tire sur un ennemi
+        //La flêche regarde la cible 
+        transform.LookAt(target);
     }
 
     void HitTarget()

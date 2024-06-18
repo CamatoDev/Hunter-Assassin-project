@@ -12,7 +12,7 @@ public class EnemyAI : MonoBehaviour
     //Audio Clip 
     public AudioClip gunSound;
     //La variable qui vas contenir le joueuer (cible de l'enemi) 
-    public Transform target;
+    private Transform target;
     //La valeur de l'ennemi 
     public int value = 50;
 
@@ -45,12 +45,16 @@ public class EnemyAI : MonoBehaviour
     public Animator animator;
     //Pour le contrôle de l'animator 
     float enemyState;
+    //Effect lors de la mort de l'ennemi 
+    public GameObject enemyDeathEffect;
 
     public NavMeshAgent agent;
 
     //
     private void Start()
     {
+        //On défini la cible 
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         //Récupère le script 
         FieldOfView = gameObject.GetComponent<FieldOfView>();
         //Recupère le component de l'audio source 
@@ -174,5 +178,27 @@ public class EnemyAI : MonoBehaviour
         {
             arrow.Seek(target);
         }
+    }
+
+    //L'ennemi meurt 
+    public void Dead()
+    {
+        //La l'ennemy se fait détruire 
+        Destroy(gameObject);
+        Debug.Log("Enemi detruit.");
+        //On ajoute un kill au joueur 
+        target.gameObject.GetComponent<PlayerStats>().playerKillNomber += 1;
+        //La fonction de recompense est lancé 
+        Rewards();
+    }
+
+    //fonction pour le spawn de la recompense 
+    void Rewards()
+    {
+        Debug.Log("Rewards spawn !");
+        //On instantie l'objet en le définissant comme un game object 
+        GameObject effectGO = (GameObject)Instantiate(enemyDeathEffect, transform.position, transform.rotation);
+        //On détruit l'objet au bout d'une seconde 
+        Destroy(effectGO, 1.5f);
     }
 }

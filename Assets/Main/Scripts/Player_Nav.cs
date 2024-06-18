@@ -13,7 +13,6 @@ public class Player_Nav : MonoBehaviour
     public AudioClip attackSound;
     //Animateur 
     public Animator animator;
-    float player_state = 0; 
 
     //Système de navigation 
     public NavMeshAgent agent;
@@ -23,7 +22,6 @@ public class Player_Nav : MonoBehaviour
     //Ennemi 
     public Transform target;
     string enemyTag = "Enemy";
-    public GameObject enemyDeathEffect;
     //Distance entre le joueuer et l'enemi 
     float Distance;
     //Distance d'attaque du joueuer 
@@ -78,9 +76,6 @@ public class Player_Nav : MonoBehaviour
             return;
         }
 
-        //le perso ne bouge pas  
-        player_state = 0f;
-
         //distanc entre le jouer et sa cible 
         Distance = Vector3.Distance(transform.position, target.position);
         //positionnement de la camera 
@@ -98,17 +93,15 @@ public class Player_Nav : MonoBehaviour
                 {
                     //si c'est le cas on verouille l'ennemy 
                     Debug.Log("Click on enemy");
-                    //le perso se met en marche 
-                    player_state = 0.1f;
-                    //Apparaitre un marqueur surr l'ennemi 
+                    //Apparaitre un marqueur sur l'ennemi 
                     /*modifié pour que je joueur suive l'ennemi dans ces déplacement jusqu'à le tuer et une fois l'ennemi mort faire spwan les récompenses*/
+                    animator.SetFloat("Walk", 1f);
                     agent.destination = target.position; 
                 }
                 else
                 {
-                    //le perso se met en marche 
-                    player_state = 0.1f;
                     //si ce n'est pas le cas on ce dirige simplement à l'endroit indiqué 
+                    animator.SetFloat("Walk", 1f);
                     agent.SetDestination(hit.point);
                 }
             }
@@ -129,20 +122,18 @@ public class Player_Nav : MonoBehaviour
                     //si c'est le cas on verouille l'ennemy 
                     Debug.Log("Click on enemy");
                     //le perso se met en marche 
-                    player_state = 0.1f;
+                    animator.SetFloat("Walk", 1f);
                     /*modifié pour que je joueur suive l'ennemi dans ces déplacement jusqu'à le tuer et une fois l'ennemi mort faire spwan les récompenses*/
                     agent.SetDestination(target.transform.position); 
                 }
                 else
                 {
                     //si ce n'est pas le cas on ce dirige simplement à l'endroit indiqué 
-                    player_state = 0.1f;
+                    animator.SetFloat("Walk", 1f);
                     agent.SetDestination(hit.point);
                 }
             }
         }//fin de la partie de test à la souris
-
-        animator.SetFloat("State", 0f);
 
         //Attaquer l'enemi si il est à une bonne distance 
         if (Distance <= attackDistance)
@@ -150,43 +141,26 @@ public class Player_Nav : MonoBehaviour
             Attack();
             PlayerDetected();
         }
-
-        animator.SetFloat("State", player_state);
     }
 
     void Attack()
     {
         //Le perso attaque 
-        player_state = 1f;
-        //Le son d'attaque se joue 
-        playSound.PlayOneShot(attackSound);
-        //La fonction de recompense est lancé 
-        Rewards();
-        //La cible se fait détruire 
-        Destroy(target.gameObject);
-        Debug.Log("Enemi detruit.");
-        //Le joueur obtient un kill 
-        Player.playerKillNomber += 1;
+        animator.SetTrigger("Attack");
         //Le joueur reçoit une recompense 
         Player.Gain(target.gameObject.GetComponent<EnemyAI>().value);
+        //Le son d'attaque se joue 
+        playSound.PlayOneShot(attackSound);
+        //La fonction de mort de l'ennemi est appelé 
+        target.gameObject.GetComponent<EnemyAI>().Dead();
     }
 
-    void PlayerDetected()
+    public void PlayerDetected()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         foreach (GameObject enemy in enemies)
         {
             enemy.GetComponent<EnemyAI>().FindPlayer(transform.position);
         }
-    }
-
-    //fonction pour le spawn de la recompense 
-    void Rewards()
-    {
-        Debug.Log("Rewards spawn !");
-        //On instantie l'objet en le définissant comme un game object 
-        GameObject effectGO = (GameObject)Instantiate(enemyDeathEffect, target.position, target.rotation);
-        //On détruit l'objet au bout d'une seconde 
-        Destroy(effectGO, 1.5f);
     }
 }

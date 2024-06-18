@@ -87,8 +87,10 @@ public class PlayerStats : MonoBehaviour
     }
 
     //fonction pour la mort du joueur 
-    void Dead()
+    public void Dead()
     {
+        //On passe la vie du joueur à 0 
+        playerLive = 0f;
         Debug.Log("Le joueur est mort.");
         Destroy(gameObject);
     }

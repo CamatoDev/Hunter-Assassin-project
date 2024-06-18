@@ -1987,7 +1987,7 @@ RectTransform:
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.023555556, y: 0.893125}
-  m_AnchorMax: {x: 0.52755564, y: 0.9725001}
+  m_AnchorMax: {x: 0.6221667, y: 0.9725001}
   m_AnchoredPosition: {x: -0.000030517578, y: -2}
   m_SizeDelta: {x: 0.000061035, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}

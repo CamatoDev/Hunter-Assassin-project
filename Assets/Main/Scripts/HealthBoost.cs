@@ -14,6 +14,10 @@ public class HealthBoost : MonoBehaviour
     public Transform player;
     //Le boost a été utilisé
     private bool use;
+    //Source audio 
+    AudioSource audioSource;
+    //Audio clip
+    public AudioClip activated;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +25,8 @@ public class HealthBoost : MonoBehaviour
         use = false;
         //le bouton n'est pas visible au lancement 
         healthBoost.gameObject.SetActive(false);
+        //On recupère la source audio
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -45,6 +51,8 @@ public class HealthBoost : MonoBehaviour
     public void Boost()
     {
         use = true;
+        //On lance le son d'activation 
+        audioSource.PlayOneShot(activated);
         //On desactive le bouton 
         healthBoost.gameObject.SetActive(false);
         //Le joueur reste sur place quand il se soigne 
@@ -57,7 +65,6 @@ public class HealthBoost : MonoBehaviour
         }
         //On detruit le boost après 2 seconde 
         Destroy(gameObject, 1f);
-        //Destroy(healthBoost.gameObject, 3f);
     }
 
     public void OnDrawGizmos()
