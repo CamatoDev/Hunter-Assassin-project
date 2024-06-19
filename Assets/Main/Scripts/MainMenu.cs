@@ -20,8 +20,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        //Création de la variable de sauvegarde de niveau (qui sera concervé même après la fermeture du jeu) 
-        PlayerPrefs.SetString("levelReached", "Level1");
+        //Utilisation de la variable de sauvegarde de niveau (qui sera concervé même après la fermeture du jeu)
         levelReached = PlayerPrefs.GetString("levelReached");
 
         levelToLoad.text = levelReached;
